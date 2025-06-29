@@ -2,8 +2,10 @@
 
 import pygame
 import random
+import os
 
 pygame.init()
+pygame.mixer.init() # Inicializa el mezclador de sonido de Pygame
 
 # Configurar la pantalla (ALTO/ANCHO)
 ANCHO_VENTANA = 800  
@@ -11,20 +13,30 @@ ALTO_VENTANA = 600
 screen = pygame.display.set_mode((ANCHO_VENTANA, ALTO_VENTANA))
 pygame.display.set_caption("Os-Car")
 
+# Rutas a tus carpetas de assets
+
+ASSETS_DIR = os.path.dirname(__file__)
+IMAGENES_DIR = os.path.join(ASSETS_DIR, "assets", "images")
+SONIDOS_DIR = os.path.join(ASSETS_DIR, "assets", "sounds")
+MUSICA_DIR = os.path.join(ASSETS_DIR, "assets", "music")
+
+#imagen del coche del jugador
+
+coche_max_5 = pygame.image.load(os.path.join(IMAGENES_DIR, "Max5.png")).convert_alpha()
+coche_max_5 = pygame.transform.scale(coche_max_5, (65, 110 ))
+
 # Colores
 COLOR_01 = (0, 0, 0) #NEGRO
 COLOR_02 = (255, 255, 255) #BLANCO
 COLOR_03 = (255, 0, 0) #ROJO
+COLOR_DEBUG = (0, 255, 0) # VERDE
 
 # Jugador 
-jugador_ancho = 50
-jugador_alto = 50
-jugador = pygame.Rect(
-    (ANCHO_VENTANA // 2) - (jugador_ancho // 2),
-    ALTO_VENTANA - (jugador_alto + 10),  
-    jugador_ancho,
-    jugador_alto
-)
+jugador = coche_max_5.get_rect()
+# Posiciona el jugador:
+jugador.centerx = ANCHO_VENTANA // 2 
+jugador.bottom = ALTO_VENTANA - 10
+
 
 # Competidores
 competidor_ancho = 50
@@ -80,7 +92,8 @@ while running:
     
     # Dibujar 
     screen.fill(COLOR_01)
-    pygame.draw.rect(screen, COLOR_02, jugador)
+    screen.blit(coche_max_5, jugador)
+    pygame.draw.rect(screen, COLOR_DEBUG, jugador, 2) 
     for competidor in competidores:
         pygame.draw.rect(screen, COLOR_03, competidor)
     
