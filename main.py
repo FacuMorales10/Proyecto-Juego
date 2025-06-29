@@ -2,6 +2,7 @@
 
 import pygame
 import random
+import json
 import os
 
 pygame.init()
