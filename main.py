@@ -22,7 +22,6 @@ SONIDOS_DIR = os.path.join(ASSETS_DIR, "assets", "sounds")
 MUSICA_DIR = os.path.join(ASSETS_DIR, "assets", "music")
 
 #imagen del coche del jugador
-
 coche_max_5 = pygame.image.load(os.path.join(IMAGENES_DIR, "Max5.png")).convert_alpha()
 coche_max_5 = pygame.transform.scale(coche_max_5, (65, 110 ))
 
